@@ -16,8 +16,11 @@ define(["compass"], function(Compass) {
    * Create a string representation of the maze
    */
   CanvasRenderer.prototype.render = function() {
+    this._context.lineWidth = 6;
     this._context.strokeRect(0, 0, this._maze.width * this._cellSize, this._maze.height * this._cellSize);
+    this._context.stroke();
 
+    this._context.lineWidth = 2;
     this._maze.grid.forEach(this._renderRow.bind(this));
     this._context.stroke();
   };
