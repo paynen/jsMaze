@@ -29,30 +29,31 @@ define(["compass"], function(Compass) {
    * @param {Array} grid The grid of the maze that the row is from
    */
   CanvasRenderer.prototype._renderRow = function(row, index, grid) {
-    var x = index * this._cellSize;
-    row.forEach(this._renderCell.bind(this, x));
+    var y = index * this._cellSize;
+    row.forEach(this._renderCell.bind(this, y));
   };
 
   /**
    * Render a specific cell
-   * @param {Number} x The x offset for this cell
+   * @param {Number} y The y offset for this cell
    * @param {Number} cell A bit mask of Compass.directions
    * @param {Number} index The index of the cell
    * @param {Number[]} row The row the cell is from
    */
-  CanvasRenderer.prototype._renderCell = function(x, cell, index, row) {
-    var y = index * this._cellSize + this._cellSize;
+  CanvasRenderer.prototype._renderCell = function(y, cell, index, row) {
+    var x = index * this._cellSize + this._cellSize;
     this._context.moveTo(x, y);
 
+    y += this._cellSize;
 
     if (cell & Compass.directions.E) {
-      this._context.moveTo(x + this._cellSize, y);
+      this._context.moveTo(x, y);
     } else {
-      this._context.lineTo(x + this._cellSize, y);
+      this._context.lineTo(x, y);
     }
 
     if (!(cell & Compass.directions.S)) {
-      this._context.lineTo(x + this._cellSize, y - this._cellSize);
+      this._context.lineTo(x - this._cellSize, y);
     }
 
   };
