@@ -4,6 +4,8 @@ define(["compass"], function(Compass) {
     this._maze = maze;
     this._context = canvas.getContext("2d");
     this._cellSize = cellSize || 10;
+    canvas.width = this._maze.width * cellSize;
+    canvas.height = this._maze.height * cellSize;
   }
 
   CanvasRenderer.prototype._maze = null;
